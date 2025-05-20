@@ -20,6 +20,7 @@ models = {
 }
 label_encoders = load_pickle("label_encoders.pkl")
 feature_columns = load_pickle("feature_columns.pkl")
+r2_scores = load_pickle("model_r2_scores.pkl")
 
 # Streamlit UI
 st.title("Car Price Prediction")
@@ -27,6 +28,7 @@ st.title("Car Price Prediction")
 # Model selection
 selected_model_name = st.sidebar.selectbox("Choose Model", list(models.keys()))
 model = models[selected_model_name]
+st.sidebar.metric("R² Score", f"{r2_scores[selected_model_name]:.4f}")
 
 # Inputs
 brand = st.sidebar.selectbox("Brand", label_encoders["Brand"].classes_)
